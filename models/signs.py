@@ -12,5 +12,5 @@ class Signs(Base):
     create_table(Base.cursor, table_name, query, remove_previous=False)
 
     @classmethod
-    def add_signs(cls):
-        pass
+    def add_signs(cls, name: str):
+        insert_into(cls.cursor, cls.table_name, ['name'], [name])

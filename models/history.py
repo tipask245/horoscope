@@ -13,5 +13,8 @@ class History(Base):
     create_table(Base.cursor, table_name, query, remove_previous=False)
 
     @classmethod
-    def add_history_note(cls):
-        pass
+    def add_history_note(cls, user_id, sign_id):
+        insert_into(cls.cursor, cls.table_name,
+                    ['user_id', 'sign_id'], [user_id, sign_id])
+
+
