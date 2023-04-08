@@ -22,3 +22,10 @@ class Sign:
             parsed_signs = json.load(file)
             for sign in parsed_signs:
                 cls.add_signs(sign['sign_id'], sign['name'], sign['translated_name'])
+
+    @classmethod
+    def get_sign_by_translated_name(cls, translated_name: str):
+        sign = select_one(table_name=cls.table_name, columns=['sign_id'],
+                      condition=f'translated_name LIKE "{translated_name}"')
+        print(sign)
+        return sign

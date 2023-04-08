@@ -32,22 +32,33 @@ def insert_into(table_name, columns: list | tuple, values: list | tuple):
             INSERT INTO {table_name} ({", ".join(columns)})
             VALUES ({', '.join(['"' + str(value) + '"' for value in values])})
         '''
-    execute_query(text)
+    return execute_query(text)
 
 
 def delete_from(table_name, condition=None):
     if not condition:
         return execute_query(f'DELETE FROM {table_name}')
-    text = \
-        f'''
+    text = f'''
             DELETE FROM {table_name}
             WHERE {condition}
-        '''
-    execute_query(text)
+            '''
+    return execute_query(text)
+
+
+def select_one(table_name, columns: list | tuple, condition: str | None):
+    db, cursor = connect_db()
+    if not condition:
+        result = cursor.execute(f'SELECT {", ".join(columns)} FROM {table_name}').fetchone()
+        db.close()
+        return result
+    text = f'SELECT {", ".join(columns)} FROM {table_name} WHERE {condition}'
+    result = cursor.execute(text).fetchone()
+    db.close()
+    return result
 
 
 def create_table(table_name: str, query: str, remove_previous=False):
     """Создание таблицы из имени таблицы и текста запроса"""
     if remove_previous:
         execute_query(f'DROP TABLE IF EXISTS {table_name}')
-    execute_query(f'CREATE TABLE IF NOT EXISTS {table_name} ({query})')
+    return execute_query(f'CREATE TABLE IF NOT EXISTS {table_name} ({query})')
