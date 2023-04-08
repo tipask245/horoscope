@@ -1,0 +1,62 @@
+[
+  {
+    "sign_id": 1,
+    "name": "Aries",
+    "translated_name": "Овен"
+  },
+  {
+    "sign_id": 7,
+    "name": "Libra",
+    "translated_name": "Весы"
+  },
+  {
+    "sign_id": 2,
+    "name": "Taurus",
+    "translated_name": "Телец"
+  },
+  {
+    "sign_id": 8,
+    "name": "Scorpio",
+    "translated_name": "Скорпион"
+  },
+  {
+    "sign_id": 3,
+    "name": "Gemini",
+    "translated_name": "Близнецы"
+  },
+  {
+    "sign_id": 9,
+    "name": "Sagittarius",
+    "translated_name": "Стрелец"
+  },
+  {
+    "sign_id": 6,
+    "name": "Virgo",
+    "translated_name": "Дева"
+  },
+  {
+    "sign_id": 4,
+    "name": "Cancer",
+    "translated_name": "Рак"
+  },
+  {
+    "sign_id": 10,
+    "name": "Capricorn",
+    "translated_name": "Козерог"
+  },
+  {
+    "sign_id": 5,
+    "name": "Leo",
+    "translated_name": "Лев"
+  },
+  {
+    "sign_id": 11,
+    "name": "Aquarius",
+    "translated_name": "Водолей"
+  },
+  {
+    "sign_id": 12,
+    "name": "Pisces",
+    "translated_name": "Рыбы"
+  }
+]
