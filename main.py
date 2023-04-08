@@ -57,10 +57,20 @@ def callback_query(call):
         horoscope_info = scrap_horoscope_today_by_sign_ru(data[1])
         print(horoscope_info)
     elif command == 'hen':
-        main_horoscope, matches, mood = scrap_horoscope_today_by_sign_en(data[1])
+        markup.add(types.InlineKeyboardButton('Вчерашний', callback_data=f'hen-yesterday_{data[1]}_{data[2]}'))
+        markup.add(types.InlineKeyboardButton('На сегодня', callback_data=f'hen-today_{data[1]}_{data[2]}'))
+        markup.add(types.InlineKeyboardButton('На завтра', callback_data=f'hen-tomorrow_{data[1]}_{data[2]}'))
+        markup.add(types.InlineKeyboardButton('На неделю', callback_data=f'hen-weekly_{data[1]}_{data[2]}'))
+        markup.add(types.InlineKeyboardButton('На месяц', callback_data=f'hen-monthly_{data[1]}_{data[2]}'))
+        markup.add(menu_button)
+        bot.send_message(chat_id=chat_id, text='Выбери нужное время', reply_markup=markup)
+    elif command[:4] == 'hen-':
+        interval = command[4:]
+        main_horoscope, matches, mood = scrap_horoscope_by_sign_en(sign_id=data[1], interval=interval)
         main_text = f'*{data[2]}*\n\n{main_horoscope}\n\n{matches}\n{mood}'
         markup.add(menu_button)
         bot.send_message(chat_id=chat_id, text=main_text, reply_markup=markup, parse_mode='Markdown')
+
     bot.answer_callback_query(call.id)
 
 
