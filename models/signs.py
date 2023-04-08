@@ -25,7 +25,6 @@ class Sign:
 
     @classmethod
     def get_sign_by_translated_name(cls, translated_name: str):
-        sign = select_one(table_name=cls.table_name, columns=['sign_id'],
-                      condition=f'translated_name LIKE "{translated_name}"')
-        print(sign)
+        sign = select_one(table_name=cls.table_name, columns=['sign_id', 'name', 'translated_name'],
+                          condition=f'translated_name LIKE "{translated_name}"')
         return sign
