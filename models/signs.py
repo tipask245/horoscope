@@ -6,14 +6,15 @@ class Sign:
     table_name = 'signs'
     query = \
         '''
-            sign_id INTEGER PRIMARY KEY,
+            sign_id INTEGER,
             name varchar(50) NOT NULL,
-            translated_name varchar(50) NOT NULL
+            translated_name varchar(50) NOT NULL,
+            PRIMARY KEY (sign_id, name)
         '''
     create_table(table_name, query, remove_previous=False)
 
     @classmethod
-    def add_signs(cls, sign_id: int, name: str, translated_name: str):
+    def add_sign(cls, sign_id: int, name: str, translated_name: str):
         insert_into(cls.table_name, ['sign_id', 'name', 'translated_name'], [sign_id, name, translated_name])
 
     @classmethod
@@ -21,7 +22,7 @@ class Sign:
         with open(f'{cls.table_name}.json', 'r', encoding='utf-8') as file:
             parsed_signs = json.load(file)
             for sign in parsed_signs:
-                cls.add_signs(sign['sign_id'], sign['name'], sign['translated_name'])
+                cls.add_sign(sign['sign_id'], sign['name'], sign['translated_name'])
 
     @classmethod
     def get_sign_by_translated_name(cls, translated_name: str):

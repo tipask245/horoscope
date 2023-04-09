@@ -58,5 +58,65 @@
     "sign_id": 12,
     "name": "Pisces",
     "translated_name": "Рыбы"
+  },
+  {
+    "sign_id": 2,
+    "name": "Goat",
+    "translated_name": "Коза"
+  },
+  {
+    "sign_id": 3,
+    "name": "Rat",
+    "translated_name": "Крыса"
+  },
+  {
+    "sign_id": 1,
+    "name": "Ox",
+    "translated_name": "Вол"
+  },
+  {
+    "sign_id": 8,
+    "name": "Horse",
+    "translated_name": "Лошадь"
+  },
+  {
+    "sign_id": 6,
+    "name": "Tiger",
+    "translated_name": "Тигр"
+  },
+  {
+    "sign_id": 10,
+    "name": "Rooster",
+    "translated_name": "Петух"
+  },
+  {
+    "sign_id": 9,
+    "name": "Monkey",
+    "translated_name": "Обезьяна"
+  },
+  {
+    "sign_id": 5,
+    "name": "Dragon",
+    "translated_name": "Драком"
+  },
+  {
+    "sign_id": 7,
+    "name": "Rabbit",
+    "translated_name": "Кролик"
+  },
+  {
+    "sign_id": 11,
+    "name": "Dog",
+    "translated_name": "Собака"
+  },
+  {
+    "sign_id": 12,
+    "name": "Pig",
+    "translated_name": "Свинья"
+  },
+  {
+    "sign_id": 4,
+    "name": "Snake",
+    "translated_name": "Змея"
   }
 ]

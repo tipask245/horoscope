@@ -7,7 +7,8 @@ class History:
         '''
             user_id INTEGER NOT NULL,
             sign_id integer NOT NULL,
-            FOREIGN KEY (sign_id) REFERENCES signs (id)
+            sign_name varchar(50) NOT NULL,
+            FOREIGN KEY (sign_id, sign_name) REFERENCES signs (id, name)
         '''
     create_table(table_name, query, remove_previous=False)
 
