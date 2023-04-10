@@ -21,7 +21,7 @@ def greeting(message):
     return bot.send_message(chat_id=message.chat.id, text=text, reply_markup=markup)
 
 
-def menu(chat_id):
+def menu(chat_id: int):
     markup = types.InlineKeyboardMarkup()
     horoscope_button = types.InlineKeyboardButton('Классический/китайский гороскоп по знаку', callback_data='horoscope')
     history_button = types.InlineKeyboardButton('История', callback_data='history')
@@ -62,10 +62,10 @@ def accept_sign(message):
         return send_options(chat_id=chat_id, sign_num=sign_num, sign_name=sign_name, translated_name=translated_name,
                             horoscope_type=horoscope_type)
     except Exception as e:
-        print(e)
+        print(f'Ошибка: {type(e)} => {e}')
 
 
-def add_horoscope_buttons(command, sign_num, sign_name, markup):
+def add_horoscope_buttons(command: str, sign_num: int, sign_name: str, markup: types.InlineKeyboardMarkup):
     markup.add(types.InlineKeyboardButton('Вчерашний', callback_data=f'{command}-yesterday_{sign_num}_{sign_name}'))
     markup.add(types.InlineKeyboardButton('На сегодня', callback_data=f'{command}-today_{sign_num}_{sign_name}'))
     markup.add(types.InlineKeyboardButton('На завтра', callback_data=f'{command}-tomorrow_{sign_num}_{sign_name}'))
@@ -84,7 +84,6 @@ def callback_query(call):
     elif command == 'history':
         user_id = call.from_user.id
         notes = History.get_notes_by_user_id(user_id)
-        print(notes)
         for note in notes:
             sign_num, sign_name, translated_name, horoscope_type = note[0], note[1], note[2], note[3]
             sign_button = types.InlineKeyboardButton(translated_name, callback_data=f'hstr-sign_{sign_num}_{sign_name}_'
@@ -108,13 +107,13 @@ def callback_query(call):
         markup.add(types.InlineKeyboardButton('На завтра', callback_data=f'hru-{tomorrow.strftime("%d-%m-%Y")}_{data[1]}_{data[2]}'))
         markup.add(menu_button)
         bot.send_message(chat_id=chat_id, text='Выбери нужное время', reply_markup=markup)
-    elif command == 'hen':
+    elif command in ('hen', 'сh-hen'):
         add_horoscope_buttons(command=command, sign_num=data[1], sign_name=data[2], markup=markup)
         markup.add(menu_button)
         bot.send_message(chat_id=chat_id, text='Выбери нужное время', reply_markup=markup)
     elif command[:4] == 'hru-':
         interval = command[4:]
-        date, main_horoscope = scrap_horoscope_by_sign_num_ru(sign_name=data[1], interval=interval)
+        date, main_horoscope = scrap_horoscope_by_sign_name_ru(sign_name=data[1], interval=interval)
         main_text = f'*{data[2]}, {date}*\n\n{main_horoscope}'
         markup.add(menu_button)
         bot.send_message(chat_id=chat_id, text=main_text, reply_markup=markup, parse_mode='Markdown')
@@ -122,6 +121,27 @@ def callback_query(call):
         interval = command[4:]
         main_horoscope, matches, mood = scrap_horoscope_by_sign_num_en(sign_num=data[1], interval=interval)
         main_text = f'*{data[2]}*\n\n{main_horoscope}\n\n{matches}\n{mood}'
+        markup.add(menu_button)
+        bot.send_message(chat_id=chat_id, text=main_text, reply_markup=markup, parse_mode='Markdown')
+    elif command == 'сh-hru':
+        sign_name, translated_name = data[1], data[2]
+        markup.add(types.InlineKeyboardButton('Вчерашний', callback_data=f'{command}-yesterday_{sign_name}_{translated_name}'))
+        markup.add(types.InlineKeyboardButton('На сегодня', callback_data=f'{command}-today_{sign_name}_{translated_name}'))
+        markup.add(types.InlineKeyboardButton('На завтра', callback_data=f'{command}-tomorrow_{sign_name}_{translated_name}'))
+        markup.add(types.InlineKeyboardButton('На неделю', callback_data=f'{command}-week_{sign_name}_{translated_name}'))
+        markup.add(types.InlineKeyboardButton('На месяц', callback_data=f'{command}-month_{sign_name}_{translated_name}'))
+        markup.add(menu_button)
+        bot.send_message(chat_id=chat_id, text='Выбери нужное время', reply_markup=markup)
+    elif command[:7] == 'сh-hen-':
+        interval = command[7:]
+        main_horoscope = scrap_ch_horoscope_by_sign_num_en(sign_num=data[1], interval=interval)
+        main_text = f'*{data[2]}*\n\n{main_horoscope}'
+        markup.add(menu_button)
+        bot.send_message(chat_id=chat_id, text=main_text, reply_markup=markup, parse_mode='Markdown')
+    elif command[:7] == 'сh-hru-':
+        interval = command[7:]
+        title, main_horoscope = scrap_ch_horoscope_by_sign_name_ru(sign_name=data[1], interval=interval)
+        main_text = f'*{data[2]}*\n\n{title}\n\n{main_horoscope}'
         markup.add(menu_button)
         bot.send_message(chat_id=chat_id, text=main_text, reply_markup=markup, parse_mode='Markdown')
 

@@ -26,7 +26,8 @@ def execute_query(full_query: str):
         print(f'Ошибка: {type(err)} => {err}')
 
 
-def insert_into(table_name, columns: list | tuple, values: list | tuple):
+def insert_into(table_name: str, columns: list | tuple, values: list | tuple):
+    """Вставка полученных значений по колонкам"""
     text = \
         f'''
             INSERT INTO {table_name} ({", ".join(columns)})
@@ -35,13 +36,11 @@ def insert_into(table_name, columns: list | tuple, values: list | tuple):
     return execute_query(text)
 
 
-def delete_from(table_name, condition=None):
+def delete_from(table_name: str, condition=None):
+    """Удаление строки, условие опционально"""
     if not condition:
         return execute_query(f'DELETE FROM {table_name}')
-    text = f'''
-            DELETE FROM {table_name}
-            WHERE {condition}
-            '''
+    text = f'DELETE FROM {table_name} WHERE {condition}'
     return execute_query(text)
 
 
@@ -67,7 +66,7 @@ def select_all(table_name: str, columns: list | tuple, condition: None | str = N
     return result
 
 
-def custom_select_all_by_query(query):
+def custom_select_all_by_query(query: str):
     db, cursor = connect_db()
     result = cursor.execute(query).fetchall()
     db.close()
@@ -75,7 +74,7 @@ def custom_select_all_by_query(query):
 
 
 def create_table(table_name: str, query: str, remove_previous: bool = False):
-    """Создание таблицы из имени таблицы и текста запроса"""
+    """Создание таблицы из имени и текста запроса"""
     if remove_previous:
         execute_query(f'DROP TABLE IF EXISTS {table_name}')
     return execute_query(f'CREATE TABLE IF NOT EXISTS {table_name} ({query})')
