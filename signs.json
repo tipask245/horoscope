@@ -1,122 +1,146 @@
 [
   {
-    "sign_id": 1,
+    "sign_num": 1,
     "name": "Aries",
-    "translated_name": "Овен"
+    "translated_name": "Овен",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 7,
+    "sign_num": 7,
     "name": "Libra",
-    "translated_name": "Весы"
+    "translated_name": "Весы",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 2,
+    "sign_num": 2,
     "name": "Taurus",
-    "translated_name": "Телец"
+    "translated_name": "Телец",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 8,
+    "sign_num": 8,
     "name": "Scorpio",
-    "translated_name": "Скорпион"
+    "translated_name": "Скорпион",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 3,
+    "sign_num": 3,
     "name": "Gemini",
-    "translated_name": "Близнецы"
+    "translated_name": "Близнецы",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 9,
+    "sign_num": 9,
     "name": "Sagittarius",
-    "translated_name": "Стрелец"
+    "translated_name": "Стрелец",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 6,
+    "sign_num": 6,
     "name": "Virgo",
-    "translated_name": "Дева"
+    "translated_name": "Дева",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 4,
+    "sign_num": 4,
     "name": "Cancer",
-    "translated_name": "Рак"
+    "translated_name": "Рак",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 10,
+    "sign_num": 10,
     "name": "Capricorn",
-    "translated_name": "Козерог"
+    "translated_name": "Козерог",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 5,
+    "sign_num": 5,
     "name": "Leo",
-    "translated_name": "Лев"
+    "translated_name": "Лев",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 11,
+    "sign_num": 11,
     "name": "Aquarius",
-    "translated_name": "Водолей"
+    "translated_name": "Водолей",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 12,
+    "sign_num": 12,
     "name": "Pisces",
-    "translated_name": "Рыбы"
+    "translated_name": "Рыбы",
+    "horoscope_type": "cl"
   },
   {
-    "sign_id": 2,
+    "sign_num": 2,
     "name": "Goat",
-    "translated_name": "Коза"
+    "translated_name": "Коза",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 3,
+    "sign_num": 3,
     "name": "Rat",
-    "translated_name": "Крыса"
+    "translated_name": "Крыса",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 1,
+    "sign_num": 1,
     "name": "Ox",
-    "translated_name": "Вол"
+    "translated_name": "Вол",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 8,
+    "sign_num": 8,
     "name": "Horse",
-    "translated_name": "Лошадь"
+    "translated_name": "Лошадь",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 6,
+    "sign_num": 6,
     "name": "Tiger",
-    "translated_name": "Тигр"
+    "translated_name": "Тигр",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 10,
+    "sign_num": 10,
     "name": "Rooster",
-    "translated_name": "Петух"
+    "translated_name": "Петух",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 9,
+    "sign_num": 9,
     "name": "Monkey",
-    "translated_name": "Обезьяна"
+    "translated_name": "Обезьяна",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 5,
+    "sign_num": 5,
     "name": "Dragon",
-    "translated_name": "Драком"
+    "translated_name": "Драком",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 7,
+    "sign_num": 7,
     "name": "Rabbit",
-    "translated_name": "Кролик"
+    "translated_name": "Кролик",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 11,
+    "sign_num": 11,
     "name": "Dog",
-    "translated_name": "Собака"
+    "translated_name": "Собака",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 12,
+    "sign_num": 12,
     "name": "Pig",
-    "translated_name": "Свинья"
+    "translated_name": "Свинья",
+    "horoscope_type": "ch"
   },
   {
-    "sign_id": 4,
+    "sign_num": 4,
     "name": "Snake",
-    "translated_name": "Змея"
+    "translated_name": "Змея",
+    "horoscope_type": "ch"
   }
 ]

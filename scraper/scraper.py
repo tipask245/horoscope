@@ -3,10 +3,10 @@ import requests
 from datetime import datetime
 
 
-def scrap_horoscope_by_sign_id_en(sign_id, interval):
-    request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-{interval}.aspx?sign={sign_id}'
+def scrap_horoscope_by_sign_num_en(sign_num, interval):
+    request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-{interval}.aspx?sign={sign_num}'
     if interval in ('weekly', 'monthly'):
-        request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-{interval}.aspx?sign={sign_id}'
+        request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-{interval}.aspx?sign={sign_num}'
     page = requests.get(request_url).text
     scraper = BeautifulSoup(page, features='html.parser')
     main_horoscope = scraper.find('div', {'class': 'main-horoscope'}).find('p')
@@ -27,14 +27,12 @@ def scrap_horoscope_by_sign_id_en(sign_id, interval):
     return main_horoscope.get_text(), matches_text, mood_text
 
 
-def scrap_horoscope_by_sign_id_ru(sign_name, interval):
+def scrap_horoscope_by_sign_num_ru(sign_name, interval):
     request_url = f'https://www.thevoicemag.ru/horoscope/daily/{sign_name.lower()}/{interval}/'
     today = datetime.today().strftime("%d-%m-%Y")
     if interval == today:
         request_url = f'https://www.thevoicemag.ru/horoscope/daily/{sign_name.lower()}/'
     page = requests.get(request_url).text
-    print(page)
-    print(interval)
     scraper = BeautifulSoup(page, features='html.parser')
     date = scraper.find('div', {'class': 'sign__description-date'}).find_all('span')
     date = ' '.join([span.text for span in date])
@@ -42,10 +40,14 @@ def scrap_horoscope_by_sign_id_ru(sign_name, interval):
     return date, main_horoscope
 
 
-def scrap_ch_horoscope_by_sign_id_en(sign_id, interval):
-    request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-{interval}.aspx?sign={sign_id}'
+def scrap_ch_horoscope_by_sign_num_en(sign_num, interval):
+    request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-{interval}.aspx?sign={sign_num}'
     if interval in ('weekly', 'monthly'):
-        request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-{interval}.aspx?sign={sign_id}'
+        request_url = f'https://www.horoscope.com/us/horoscopes/general/horoscope-general-{interval}.aspx?sign={sign_num}'
     page = requests.get(request_url).text
     scraper = BeautifulSoup(page, features='html.parser')
     main_horoscope = scraper.find('div', {'class': 'main-horoscope'}).find('p')
+
+
+def scrap_ch_horoscope_by_sign_num_ru(sign_num, interval):
+    pass

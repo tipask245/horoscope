@@ -45,7 +45,7 @@ def delete_from(table_name, condition=None):
     return execute_query(text)
 
 
-def select_one(table_name, columns: list | tuple, condition: str | None):
+def select_one(table_name: str, columns: list | tuple, condition: None | str = None):
     db, cursor = connect_db()
     if not condition:
         result = cursor.execute(f'SELECT {", ".join(columns)} FROM {table_name}').fetchone()
@@ -57,7 +57,24 @@ def select_one(table_name, columns: list | tuple, condition: str | None):
     return result
 
 
-def create_table(table_name: str, query: str, remove_previous=False):
+def select_all(table_name: str, columns: list | tuple, condition: None | str = None):
+    db, cursor = connect_db()
+    text = f'SELECT {", ".join(columns)} FROM {table_name} WHERE {condition}'
+    if not condition:
+        text = f'SELECT {", ".join(columns)} FROM {table_name}'
+    result = cursor.execute(text).fetchall()
+    db.close()
+    return result
+
+
+def custom_select_all_by_query(query):
+    db, cursor = connect_db()
+    result = cursor.execute(query).fetchall()
+    db.close()
+    return result
+
+
+def create_table(table_name: str, query: str, remove_previous: bool = False):
     """Создание таблицы из имени таблицы и текста запроса"""
     if remove_previous:
         execute_query(f'DROP TABLE IF EXISTS {table_name}')
