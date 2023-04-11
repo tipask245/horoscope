@@ -53,9 +53,11 @@ def send_options(chat_id: int, sign_name: str, sign_num: int, translated_name: s
 def accept_sign(message):
     try:
         sign = Sign.get_sign_by_translated_name(message.text)
+        if not sign:
+            markup = types.InlineKeyboardMarkup()
+            markup.add(menu_button)
+            return bot.send_message(chat_id=message.chat.id, text='Такого знака нет', reply_markup=markup)
         sign_num, sign_name, translated_name, horoscope_type = sign[0], sign[1], sign[2], sign[3]
-        if not sign_num or not sign_name:
-            return
         chat_id = message.chat.id
         user_id = message.from_user.id
         History.add_history_note(user_id=user_id, sign_name=sign_name)
