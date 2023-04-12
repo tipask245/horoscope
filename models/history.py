@@ -21,9 +21,8 @@ class History:
         return custom_select_all_by_query(query=query)[::-1]
 
     @classmethod
-    def add_history_note(cls, user_id: int, sign_name: str):
+    def add_history_note(cls, user_id: int, sign_id: str):
         count = len(select_all(table_name=cls.table_name, columns=['*'], condition=f'user_id = {user_id}'))
-        sign_id = select_one('signs', columns=['id'], condition=f'name = "{sign_name}"')[0]
         existed_note = select_one(table_name=cls.table_name, columns=['id'],
                                   condition=f'user_id = {user_id} AND sign_id = {sign_id}')
         if existed_note:

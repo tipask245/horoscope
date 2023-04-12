@@ -3,73 +3,97 @@
     "sign_num": 1,
     "name": "Aries",
     "translated_name": "Овен",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "21-03",
+    "end_date": "19-04"
   },
   {
     "sign_num": 7,
     "name": "Libra",
     "translated_name": "Весы",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "23-09",
+    "end_date": "22-10"
   },
   {
     "sign_num": 2,
     "name": "Taurus",
     "translated_name": "Телец",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "20-04",
+    "end_date": "20-05"
   },
   {
     "sign_num": 8,
     "name": "Scorpio",
     "translated_name": "Скорпион",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "23-10",
+    "end_date": "21-11"
   },
   {
     "sign_num": 3,
     "name": "Gemini",
     "translated_name": "Близнецы",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "21-05",
+    "end_date": "20-06"
   },
   {
     "sign_num": 9,
     "name": "Sagittarius",
     "translated_name": "Стрелец",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "22-11",
+    "end_date": "21-12"
   },
   {
     "sign_num": 6,
     "name": "Virgo",
     "translated_name": "Дева",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "23-08",
+    "end_date": "22-09"
   },
   {
     "sign_num": 4,
     "name": "Cancer",
     "translated_name": "Рак",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "21-06",
+    "end_date": "22-07"
   },
   {
     "sign_num": 10,
     "name": "Capricorn",
     "translated_name": "Козерог",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "22-12",
+    "end_date": "19-01"
   },
   {
     "sign_num": 5,
     "name": "Leo",
     "translated_name": "Лев",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "23-07",
+    "end_date": "22-08"
   },
   {
     "sign_num": 11,
     "name": "Aquarius",
     "translated_name": "Водолей",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "20-12",
+    "end_date": "18-02"
   },
   {
     "sign_num": 12,
     "name": "Pisces",
     "translated_name": "Рыбы",
-    "horoscope_type": "cl"
+    "horoscope_type": "cl",
+    "start_date": "19-02",
+    "end_date": "20-03"
   },
   {
     "sign_num": 2,

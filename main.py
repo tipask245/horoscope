@@ -23,12 +23,48 @@ def greeting(message):
 
 def menu(chat_id: int):
     markup = types.InlineKeyboardMarkup()
-    horoscope_button = types.InlineKeyboardButton('Классический/китайский гороскоп по знаку', callback_data='horoscope')
+    cl_horoscope_button = types.InlineKeyboardButton('Классический гороскоп', callback_data='horoscope-cl')
+    ch_horoscope_button = types.InlineKeyboardButton('Китайский гороскоп', callback_data='horoscope-ch')
     history_button = types.InlineKeyboardButton('История', callback_data='history')
-    markup.add(horoscope_button)
+    markup.add(cl_horoscope_button)
+    markup.add(ch_horoscope_button)
     markup.add(history_button)
     text = f'Выбери подходящий вариант'
     return bot.send_message(chat_id, text, reply_markup=markup)
+
+
+def if_sign_not_exist(chat_id):
+    markup = types.InlineKeyboardMarkup()
+    markup.add(menu_button)
+    return bot.send_message(chat_id=chat_id, text='Такого знака нет', reply_markup=markup)
+
+
+def accept_cl_sign(message):
+    try:
+        if message.text[0].isdigit():
+            sign = Sign.get_cl_sign_by_date(date=message.text)
+            print(sign)
+        else:
+            sign = Sign.get_sign_by_translated_name(translated_name=message.text, horoscope_type='cl')
+        chat_id = message.chat.id
+        if not sign:
+            return if_sign_not_exist(chat_id=chat_id)
+        user_id = message.from_user.id
+        return sign_handling(sign=sign, chat_id=chat_id, user_id=user_id)
+    except Exception as e:
+        print(f'Ошибка: {type(e)} => {e}')
+
+
+def accept_ch_sign(message):
+    try:
+        sign = Sign.get_sign_by_translated_name(translated_name=message.text, horoscope_type='ch')
+        chat_id = message.chat.id
+        if not sign:
+            return if_sign_not_exist(chat_id=chat_id)
+        user_id = message.from_user.id
+        return sign_handling(sign=sign, chat_id=chat_id, user_id=user_id)
+    except Exception as e:
+        print(f'Ошибка: {type(e)} => {e}')
 
 
 def send_options(chat_id: int, sign_name: str, sign_num: int, translated_name: str, horoscope_type: str):
@@ -50,17 +86,10 @@ def send_options(chat_id: int, sign_name: str, sign_num: int, translated_name: s
                             parse_mode='Markdown')
 
 
-def accept_sign(message):
+def sign_handling(sign: tuple, chat_id: int, user_id: int):
     try:
-        sign = Sign.get_sign_by_translated_name(message.text)
-        if not sign:
-            markup = types.InlineKeyboardMarkup()
-            markup.add(menu_button)
-            return bot.send_message(chat_id=message.chat.id, text='Такого знака нет', reply_markup=markup)
-        sign_num, sign_name, translated_name, horoscope_type = sign[0], sign[1], sign[2], sign[3]
-        chat_id = message.chat.id
-        user_id = message.from_user.id
-        History.add_history_note(user_id=user_id, sign_name=sign_name)
+        sign_id, sign_num, sign_name, translated_name, horoscope_type = sign
+        History.add_history_note(user_id=user_id, sign_id=sign_id)
         return send_options(chat_id=chat_id, sign_num=sign_num, sign_name=sign_name, translated_name=translated_name,
                             horoscope_type=horoscope_type)
     except Exception as e:
@@ -97,9 +126,12 @@ def callback_query(call):
         sign_num, sign_name, translated_name, horoscope_type = data[1], data[2], data[3], data[4]
         send_options(chat_id=chat_id, sign_num=sign_num, sign_name=sign_name, translated_name=translated_name,
                      horoscope_type=horoscope_type)
-    elif command == 'horoscope':
-        bot_message = bot.send_message(chat_id=chat_id, text='Напиши название знака зодиака на русском языке')
-        bot.register_next_step_handler(message=bot_message, callback=accept_sign)
+    elif command[:-3] == 'horoscope':
+        bot_message = bot.send_message(chat_id=chat_id, text='Напиши название знака на русском языке или дату рождения в формате DD-MM')
+        if command[-2:] == 'cl':
+            bot.register_next_step_handler(message=bot_message, callback=accept_cl_sign)
+        else:
+            bot.register_next_step_handler(message=bot_message, callback=accept_ch_sign)
     elif command == 'hru':
         today = datetime.today().strftime("%d-%m-%Y")
         yesterday = datetime.today() - timedelta(days=1)
