@@ -44,7 +44,7 @@ def delete_from(table_name: str, condition=None):
     return execute_query(text)
 
 
-def select_one(table_name: str, columns: list | tuple, condition: None | str = None):
+def select_one(table_name: str, columns: list | tuple, condition: None | str = None) -> tuple | None:
     db, cursor = connect_db()
     if not condition:
         result = cursor.execute(f'SELECT {", ".join(columns)} FROM {table_name}').fetchone()
@@ -56,7 +56,7 @@ def select_one(table_name: str, columns: list | tuple, condition: None | str = N
     return result
 
 
-def select_all(table_name: str, columns: list | tuple, condition: None | str = None):
+def select_all(table_name: str, columns: list | tuple, condition: None | str = None) -> list:
     db, cursor = connect_db()
     text = f'SELECT {", ".join(columns)} FROM {table_name} WHERE {condition}'
     if not condition:

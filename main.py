@@ -2,6 +2,7 @@ import telebot
 from telebot import types
 from models.signs import Sign
 from models.history import History
+from models.predictions import Prediction
 from scraper.scraper import *
 from datetime import datetime, timedelta
 
@@ -25,9 +26,11 @@ def menu(chat_id: int):
     markup = types.InlineKeyboardMarkup()
     cl_horoscope_button = types.InlineKeyboardButton('Классический гороскоп', callback_data='horoscope-cl')
     ch_horoscope_button = types.InlineKeyboardButton('Китайский гороскоп', callback_data='horoscope-ch')
+    prediction_button = types.InlineKeyboardButton('Предсказания', callback_data='prediction')
     history_button = types.InlineKeyboardButton('История', callback_data='history')
     markup.add(cl_horoscope_button)
     markup.add(ch_horoscope_button)
+    markup.add(prediction_button)
     markup.add(history_button)
     text = f'Выбери подходящий вариант'
     return bot.send_message(chat_id, text, reply_markup=markup)
@@ -178,6 +181,10 @@ def callback_query(call):
         main_text = f'*{data[2]}*\n\n{title}\n\n{main_horoscope}'
         markup.add(menu_button)
         bot.send_message(chat_id=chat_id, text=main_text, reply_markup=markup, parse_mode='Markdown')
+    elif command == 'prediction':
+        prediction_text = Prediction.get_random_prediction()
+        markup.add(menu_button)
+        bot.send_message(chat_id=chat_id, text=prediction_text, reply_markup=markup)
 
     bot.answer_callback_query(call.id)
 

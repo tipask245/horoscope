@@ -23,7 +23,7 @@ class Sign:
                     [sign_id, name, translated_name, horoscope_type, start_date, end_date])
 
     @classmethod
-    def add_all_signs_from_json(cls):
+    def add_all_signs_from_json(cls) -> None:
         with open(f'{cls.table_name}.json', 'r', encoding='utf-8') as file:
             parsed_signs = json.load(file)
             for sign in parsed_signs:
@@ -31,7 +31,7 @@ class Sign:
                              sign.get('start_date'), sign.get('end_date'))
 
     @classmethod
-    def get_all_signs(cls, horoscope_type: str | None):
+    def get_all_signs(cls, horoscope_type: str | None) -> list:
         condition = f'horoscope_type LIKE "{horoscope_type}"' if horoscope_type else None
         all_signs = select_all(table_name=cls.table_name, columns=['*'], condition=condition)
         return all_signs
@@ -48,7 +48,6 @@ class Sign:
         day, month = list(map(int, date.split('-')))
         for sign in all_signs:
             start_date, end_date = sign[-2].split('-'), sign[-1].split('-')
-            print(day, month, start_date, end_date)
             if (day >= int(start_date[0]) and month == int(start_date[1])) or \
                     (day <= int(end_date[0]) and month == int(end_date[1])):
                 return sign[:-2]
