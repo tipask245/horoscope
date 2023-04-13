@@ -45,6 +45,7 @@ def delete_from(table_name: str, condition=None):
 
 
 def select_one(table_name: str, columns: list | tuple, condition: None | str = None) -> tuple | None:
+    """Получение одной записи из бд по колонкам и условию (опционально)"""
     db, cursor = connect_db()
     if not condition:
         result = cursor.execute(f'SELECT {", ".join(columns)} FROM {table_name}').fetchone()
@@ -57,6 +58,7 @@ def select_one(table_name: str, columns: list | tuple, condition: None | str = N
 
 
 def select_all(table_name: str, columns: list | tuple, condition: None | str = None) -> list:
+    """Получение всех записей из бд по колонкам и условию (опционально)"""
     db, cursor = connect_db()
     text = f'SELECT {", ".join(columns)} FROM {table_name} WHERE {condition}'
     if not condition:
@@ -66,7 +68,8 @@ def select_all(table_name: str, columns: list | tuple, condition: None | str = N
     return result
 
 
-def custom_select_all_by_query(query: str):
+def custom_select_all_by_query(query: str) -> list:
+    """Получение всех записей из бд по кастомному запросу"""
     db, cursor = connect_db()
     result = cursor.execute(query).fetchall()
     db.close()
