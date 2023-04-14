@@ -51,5 +51,3 @@ class Sign:
             if (day >= int(start_date[0]) and month == int(start_date[1])) or \
                     (day <= int(end_date[0]) and month == int(end_date[1])):
                 return sign[:-2]
-
-

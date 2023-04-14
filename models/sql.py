@@ -8,7 +8,6 @@ def connect_db():
     try:
         db = sqlite3.connect(DB_PATH)
         cursor = db.cursor()
-        print(f'connect to {DB_PATH}')
     except Exception as err:
         print(f'Ошибка подключения: {type(err)}, {err}')
         return []

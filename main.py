@@ -46,7 +46,6 @@ def accept_cl_sign(message):
     try:
         if message.text[0].isdigit():
             sign = Sign.get_cl_sign_by_date(date=message.text)
-            print(sign)
         else:
             sign = Sign.get_sign_by_translated_name(translated_name=message.text, horoscope_type='cl')
         chat_id = message.chat.id
