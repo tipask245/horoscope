@@ -7,7 +7,7 @@ from scraper.scraper import *
 from datetime import datetime, timedelta
 
 
-token = '6022061763:AAFAti-9Cvb6RS0f65MNYyau8nbVMPuN71k'
+token = ''
 
 bot = telebot.TeleBot(token)
 
